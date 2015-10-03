@@ -2,13 +2,17 @@
 #define ENABLE_LOGGING true
 #endif
 
+#include <SFML/OpenGL.hpp>
 #include "../include/graphics.hpp"
 #include "../include/utilities.hpp" // LOG, LOG_ME
 
 Display::Display(int width, int height, const char *title):
 	width(width >= MIN_WIDTH ? width : MIN_WIDTH),
 	height(height >= MIN_HEIGHT ? height : MIN_HEIGHT),
-	mode(width, height), win(mode, title) {
+	mode(width, height), con(DEFAULT_DEPTH, 
+			DEFAULT_STENCIL, DEFAULT_ANTIALIASING, 
+			DEFAULT_MAJOR, DEFAULT_MINOR),
+	win(mode, title, sf::Style::Default, con) {
 	LOG_ME();
 
 	win.setVerticalSyncEnabled(true); 
@@ -17,9 +21,7 @@ Display::Display(int width, int height, const char *title):
 }
 
 Display::Display(void):	Display(DEFAULT_WIDTH, 
-		DEFAULT_HEIGHT, "Untitled") {
-	LOG_ME(); 
-}
+		DEFAULT_HEIGHT, "Untitled") {}
 
 Display::~Display(void) {
 	LOG_ME(); 
@@ -65,32 +67,37 @@ bool Display::digestEvent(const sf::Event &ev){
 	switch(ev.type){
 		case sf::Event::Closed:
 			return false;
+		case sf::Event::Resized: 
+			glViewport(0, 0,
+					ev.size.width, 
+					ev.size.height); 
+			break; 
 		case sf::Event::MouseButtonPressed:
 			return digestMousePress(ev.mouseButton.x, 
 					ev.mouseButton.y, ev.mouseButton.button); 
 		case sf::Event::KeyPressed:
 			return digestKeyPress(ev.key);
 		default:
-			return true; 
-	}
-}
-
-bool Display::digestEvents(void) {
-	// LOG_ME(); 
-	sf::Event ev;
-	win.setActive(); 
-	while(win.isOpen() && win.pollEvent(ev)) {
-		if(!digestEvent(ev)){
-			sf::Time t; 
-			LOG_TIME("Exiting with status ", 
-					t.asMilliseconds()); 
-			return false; 
-		}
+			break; 
 	}
 	return true; 
 }
 
-void Display::draw(int ticks) {
-	win.clear(sf::Color::Black);
+bool Display::digestEvents(void) {
+	// LOG_ME(); 
+	sf::Event ev; 	
+	win.setActive(); 
+	while(win.isOpen() && win.pollEvent(ev)) {
+		if(!digestEvent(ev)) 
+			return false;
+	}
+	return true; 
+}
+
+void Display::draw(int ticks){
+	//win.clear(sf::Color(0, 0, 0)); 
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); 
+	glClear(GL_COLOR_BUFFER_BIT); 
+	//glFillRect(0, 0, 10, 10); 
 	win.display(); 
 }

@@ -12,12 +12,12 @@ BINDIR=./build/
 WFLAGS?=-Wall
 SHELL?=shell
 CXX?=clang++# clang++, g++, etc.
-CXXFLAGS?=$(WFLAGS)	-std=c++11 -pthread -fopenmp\
+CXXFLAGS?=$(WFLAGS)	-std=c++11 -pthread \
 	$(shell pkg-config --cflags python3)
 	# -I$(shell octave-config -p INCLUDEDIR)
 
 LIBS?=$(shell pkg-config --libs python3 sfml-graphics)\
-	 -lboost_system -lpthread
+	 -lboost_system -lpthread -lGL -lGLU -lGLEW
 	 # -L$(shell octave-config -p LIBDIR)
 TARGET?=spide
 

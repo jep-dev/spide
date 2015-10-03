@@ -10,17 +10,23 @@ private:
 		MIN_WIDTH = 320, 
 		MIN_HEIGHT = 320, 
 		DEFAULT_WIDTH = 640, 
-		DEFAULT_HEIGHT = 480;
+		DEFAULT_HEIGHT = 480,
+		DEFAULT_DEPTH = 32, 
+		DEFAULT_STENCIL = 8, 
+		DEFAULT_ANTIALIASING = 1, 
+		DEFAULT_MAJOR = 3, 
+		DEFAULT_MINOR = 2;
 public:
 	int width, height;
 	sf::VideoMode mode;
+	sf::ContextSettings con; 
 	sf::RenderWindow win;
 	
 	/** \brief Initializes a window.
 	 * \param width The intended width of the frame.
 	 * \param height The intended height of the frame.
 	 * \param title The text for the title bar. */
-	Display(int width, int height, const char *title);
+	Display(int width, int height, const char *title); 
 
 	/** \brief Initializes a default window. */
 	Display(void);
