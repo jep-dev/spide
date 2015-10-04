@@ -22,12 +22,12 @@
 	#endif
 	#if !defined(LOG_ME)
 	#define LOG_ME() LOG( \
-		"# %66s #\n%-57s # Line %03d #\n", \
+		"| %66s |\n%-57s | Line %03d |\n", \
 		__FILE__, __PRETTY_FUNCTION__, \
 		__LINE__-1 )
 	#endif
 	#if !defined(LOG_TIME)
-		#define LOG_TIME(MSG, T) LOG("# %64s %-1d #\n", MSG, T)
+		#define LOG_TIME(MSG, T) LOG("| %64s %-1d |\n", MSG, T)
 	#endif
 #else
 

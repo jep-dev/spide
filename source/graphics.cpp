@@ -43,7 +43,7 @@ bool Display::digestKeyPress(const sf::Event::KeyEvent &ev) {
 //bool Display::digestMousePress(const sf::Event::MouseButtonEvent &ev){
 bool Display::digestMousePress(int x, int y, sf::Mouse::Button button) {
 	//LOG_ME(); too long.
-	const char *fmt = "# %52s @(%04d, %04d) #\n";
+	const char *fmt = "| %52s | %4d | %4d |\n";
 
 	switch(button){
 		case sf::Mouse::Left:
