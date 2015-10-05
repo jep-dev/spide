@@ -1,4 +1,7 @@
 HEAD/*
+hooks
+hooks/*
+info
 info/*
 README.md
 config
