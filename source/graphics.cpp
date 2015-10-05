@@ -14,10 +14,10 @@ Display::Display(int width, int height, const char *title):
 			DEFAULT_MAJOR, DEFAULT_MINOR),
 	win(mode, title, sf::Style::Default, con) {
 	LOG_ME();
-	
 	win.setVerticalSyncEnabled(true); 
 	//win.setFramerateLimit(58);
-	win.setFramerateLimit(32); 
+	
+	win.setFramerateLimit(16); 
 }
 
 Display::Display(void):	Display(DEFAULT_WIDTH, 
