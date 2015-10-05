@@ -11,11 +11,11 @@ private:
 		MIN_HEIGHT = 320, 
 		DEFAULT_WIDTH = 640, 
 		DEFAULT_HEIGHT = 480,
-		DEFAULT_DEPTH = 32, 
+		DEFAULT_DEPTH = 24, 
 		DEFAULT_STENCIL = 8, 
-		DEFAULT_ANTIALIASING = 1, 
+		DEFAULT_ANTIALIASING = 2, 
 		DEFAULT_MAJOR = 3, 
-		DEFAULT_MINOR = 2;
+		DEFAULT_MINOR = 0;
 public:
 	int width, height;
 	sf::VideoMode mode;
@@ -31,7 +31,7 @@ public:
 	/** \brief Initializes a default window. */
 	Display(void);
 
-	/** \brief Releases resources. */
+	/** \brief Destructor (releases resources). */
 	~Display(void);
 	
 	/** \brief Handles a single keypress.
@@ -39,13 +39,13 @@ public:
 	 * \return True unless the window should/will close. */
 	bool digestKeyPress(const sf::Event::KeyEvent &ev);
 
-	/**\brief Consume a single mouse button event.
+	/** \brief Consume a single mouse button event.
 	 * \param The information associated with the press.
 	 * \return true, unless the window should/will close. */
 	bool digestMousePress(int width, int height, 
 			sf::Mouse::Button button);  
 
-	/**\brief Consume a single window event.
+	/** \brief Consume a single window event.
 	 * \param ev An event to handle.
 	 * \return true, unless the window should/will close. */
 	bool digestEvent(const sf::Event &ev);
@@ -54,6 +54,8 @@ public:
 	 * \return true, unless the window is closing. */
 	bool digestEvents(void);
 
+	/** \brief Draw one frame to the screen.
+	 * \param delta Time since the last frame in milliseconds. */
 	void draw(int delta); 
 
 }; 

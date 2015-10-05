@@ -14,17 +14,17 @@ Display::Display(int width, int height, const char *title):
 			DEFAULT_MAJOR, DEFAULT_MINOR),
 	win(mode, title, sf::Style::Default, con) {
 	LOG_ME();
-
+	
 	win.setVerticalSyncEnabled(true); 
 	//win.setFramerateLimit(58);
-	win.setFramerateLimit(1); 
+	win.setFramerateLimit(32); 
 }
 
 Display::Display(void):	Display(DEFAULT_WIDTH, 
 		DEFAULT_HEIGHT, "Untitled") {}
 
 Display::~Display(void) {
-	LOG_ME(); 
+	LOG_ME();
 	// Dispose of resources
 }
 
@@ -35,28 +35,26 @@ bool Display::digestKeyPress(const sf::Event::KeyEvent &ev) {
 			return false;
 		case sf::Keyboard::F4:
 			// fullscreen
+			
 		default:
 			return true; 
 	}
 }
 
-//bool Display::digestMousePress(const sf::Event::MouseButtonEvent &ev){
-bool Display::digestMousePress(int x, int y, sf::Mouse::Button button) {
-	//LOG_ME(); too long.
-	const char *fmt = "| %52s | %4d | %4d |\n";
-
+bool Display::digestMousePress(int x, int y, 
+		sf::Mouse::Button button) {
 	switch(button){
 		case sf::Mouse::Left:
-			LOG(fmt, "Left press", x, y);
+			LOG_PRESS("Left press", x, y);
 			break;
 		case sf::Mouse::Middle:
-			LOG(fmt, "Middle press", x, y);
+			LOG_PRESS("Middle press", x, y);
 			break; 
-		case sf::Mouse::Right:
-			LOG(fmt, "Right press", x, y);
+			case sf::Mouse::Right:
+			LOG_PRESS("Right press", x, y);
 			break; 
 		default:
-			LOG(fmt, "Other press", x, y);
+			LOG_PRESS("Other press", x, y);
 			break; 
 	}
 	return true; 
@@ -90,14 +88,13 @@ bool Display::digestEvents(void) {
 	while(win.isOpen() && win.pollEvent(ev)) {
 		if(!digestEvent(ev)) 
 			return false;
+		draw(0);
 	}
 	return true; 
 }
 
 void Display::draw(int ticks){
-	//win.clear(sf::Color(0, 0, 0)); 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); 
 	glClear(GL_COLOR_BUFFER_BIT); 
-	//glFillRect(0, 0, 10, 10); 
 	win.display(); 
 }
