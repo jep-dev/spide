@@ -17,7 +17,7 @@ int main(int argc, const char **argv){
 	LOG_ME();
 
 	Display disp;
-	while(disp.digestEvents()){
+	while(Display::digestEvents(&disp.win)){
 		
 		// TODO
 	}
