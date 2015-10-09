@@ -1,10 +1,12 @@
 #if !defined(ENABLE_LOGGING)
 #define ENABLE_LOGGING true
 #endif
+// LOG*
+#include "../include/utilities.hpp"
+
+#include "../include/graphics.hpp"
 
 #include <SFML/OpenGL.hpp>
-#include "../include/graphics.hpp"
-#include "../include/utilities.hpp" // LOG, LOG_ME
 
 Display::Display(int width, int height, const char *title):
 	width(width >= MIN_WIDTH ? width : MIN_WIDTH),
@@ -22,9 +24,6 @@ Display::Display(int width, int height, const char *title):
 	glDisable(GL_CULL_FACE);
 
 }
-
-Display::Display(void):	Display(DEFAULT_WIDTH, 
-		DEFAULT_HEIGHT, "Untitled") {}
 
 Display::~Display(void) {
 	LOG_ME();
@@ -53,7 +52,7 @@ bool Display::digestMousePress(sf::Window *const win,
 			break; 
 			case sf::Mouse::Right:
 			LOG_PRESS("Right press", x, y);
-			break; 
+			break;
 		default:
 			LOG_PRESS("Other press", x, y);
 			break; 

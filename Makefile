@@ -11,10 +11,19 @@ BINDIR=./build/
 
 WFLAGS?=-Wall
 SHELL?=shell
-CXX?=clang++# clang++, g++, etc.
-CXXFLAGS?=$(WFLAGS)	-std=c++11 -pthread \
+
+
+## CXX?=clang++# clang++, g++, etc.
+## CXXFLAGS?=$(WFLAGS)	-std=c++11 -pthread \
+##	$(shell pkg-config --cflags python3)
+##	# -I$(shell octave-config -p INCLUDEDIR)
+
+
+CXX?=gxx# clang++, g++, etc.
+CXXFLAGS?=$(WFLAGS)	-std=c1x -pthread \
 	$(shell pkg-config --cflags python3)
 	# -I$(shell octave-config -p INCLUDEDIR)
+
 
 LIBS?=$(shell pkg-config --libs python3 sfml-graphics)\
 	 -lboost_system -lpthread -lGL -lGLU -lGLEW

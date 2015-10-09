@@ -2,7 +2,7 @@
 #define UTILITIES_HPP
 
 #include <vector>
-
+#include <stdio.h>
 
 #if !defined(CEXT)
 	#define CEXT extern "C"

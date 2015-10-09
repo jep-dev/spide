@@ -5,6 +5,6 @@
 #define ENABLE_LOGGING true
 #endif
 
-int main(int argc, const char **argv); 
+extern "C" int main(int argc, const char **argv); 
 
 #endif

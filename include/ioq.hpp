@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 
-struct ioq {
+CEXT struct ioq {
 	
 	std::vector<const char*> inbox, outbox;
 
@@ -21,7 +21,7 @@ struct ioq {
 	~ioq(void);
 };
 
-std::ostream& operator<< 
+CEXT std::ostream& operator<< 
 	(std::ostream& rhs, const ioq& io); 
 
 #endif

@@ -1,9 +1,9 @@
 #ifndef GRAPHICS_HPP
 #define GRAPHICS_HPP
 
-#include "SFML/Graphics.hpp"
-// #include "SFML/Window.hpp" // Event, KeyEvent types
-
+// Event, KeyEvent, Mouse::Button, Window
+#include <SFML/Graphics.hpp>
+CEXT {
 struct Display {
 	static const int
 		MIN_WIDTH = 480,
@@ -25,9 +25,6 @@ struct Display {
 	 * \param height The intended height of the frame.
 	 * \param title The text for the title bar. */
 	Display(int width, int height, const char *title); 
-
-	/** \brief Initializes a default window. */
-	Display(void);
 
 	/** \brief Destructor (releases resources). */
 	~Display(void);
@@ -58,7 +55,6 @@ struct Display {
 	 * \param delta Time since the last frame in ms. */
 	static void draw(sf::Window *const win, 
 			int milliDelta); 
-
-}; 
-
+};
+};
 #endif

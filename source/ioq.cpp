@@ -3,7 +3,7 @@
 #endif
 
 #include <vector>
-#include <iostream>
+#include <stdio.h>
 #include "../include/utilities.hpp"
 #include "../include/ioq.hpp"
 
