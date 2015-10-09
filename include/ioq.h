@@ -1,7 +1,7 @@
-#if !defined(IOQ_HPP)
-#define IOQ_HPP
+#if !defined(IOQ_H)
+#define IOQ_H
 
-#include "../include/utilities.hpp"
+#include "../include/util.h"
 #include <vector>
 #include <iostream>
 

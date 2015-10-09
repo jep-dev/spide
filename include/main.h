@@ -1,5 +1,5 @@
-#if !defined(MAIN_HPP)
-#define MAIN_HPP
+#if !defined(MAIN_H)
+#define MAIN_H
 
 #if !defined(ENABLE_LOGGING)
 #define ENABLE_LOGGING true

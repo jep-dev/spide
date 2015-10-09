@@ -1,5 +1,5 @@
-#ifndef GRAPHICS_HPP
-#define GRAPHICS_HPP
+#ifndef GFX_H
+#define GFX_H
 
 // Event, KeyEvent, Mouse::Button, Window
 #include <SFML/Graphics.hpp>

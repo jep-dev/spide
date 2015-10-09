@@ -1,5 +1,5 @@
-#ifndef UTILITIES_HPP
-#define UTILITIES_HPP
+#ifndef UTIL_H
+#define UTIL_H
 
 #include <vector>
 #include <stdio.h>
@@ -32,12 +32,6 @@
 		#define LOG_TIME(MSG, T) LOG("| %64s %-1d |\n", MSG, T)
 	#endif
 #else
-
-/*
-	#if !defined(ENABLE_LOGGING)
-	#define ENABLE_LOGGING false
-	#endif
-*/
 	#if !defined(LOG)
 		#define LOG(...) do{} while(0) 
 	#endif

@@ -1,10 +1,11 @@
 #if !defined(ENABLE_LOGGING)
 #define ENABLE_LOGGING true
 #endif
-// LOG*
-#include "../include/utilities.hpp"
 
-#include "../include/graphics.hpp"
+// LOG*
+#include "../include/util.h"
+
+#include "../include/gfx.h"
 
 #include <SFML/OpenGL.hpp>
 
@@ -22,7 +23,6 @@ Display::Display(int width, int height, const char *title):
 	
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
-
 }
 
 Display::~Display(void) {
