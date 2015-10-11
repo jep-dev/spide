@@ -9,55 +9,63 @@ SRCDIR=./source/
 OBJDIR=./objects/
 BINDIR=./build/
 
+# CSFML?=/usr/lib/x86_64-linux-gnu
+
 WFLAGS?=-Wall
 SHELL?=shell
 
+TARGET?=spide 
 
-## CXX?=clang++# clang++, g++, etc.
-## CXXFLAGS?=$(WFLAGS)	-std=c++11 -pthread \
-##	$(shell pkg-config --cflags python3)
-##	# -I$(shell octave-config -p INCLUDEDIR)
+CSFML?=/usr/lib/x86_64-linux-gnu/
 
+CXX?=clang++
+CXXFLAGS?=$(WFLAGS) -std=c++11 -pthread \
+		  -I../CSFML/include/
 
 CPP?=gcc# clang++, g++, etc.
 CPPFLAGS?=$(WFLAGS)	-std=c1x -pthread \
-	$(shell pkg-config --cflags python3)
-	# -I$(shell octave-config -p INCLUDEDIR)
+		  -I../CSFML/include/
+	# $(shell pkg-config --cflags sfml-graphics)
 
-LIBS?=$(shell pkg-config --libs python3 sfml-graphics)\
-	 -lboost_system -lpthread -lGL -lGLU -lGLEW
-	 # -L$(shell octave-config -p LIBDIR)
-TARGET?=spide
+LIBS?=-lpthread -lGL -lGLU -lGLEW \
+	-lcsfml-graphics
+	# -lsfml-system -lsfml-graphics
+	# $(shell pkg-config --libs python3 sfml-graphics) 
 
-INCLUDES=$(INCDIR)util.h\
-		 $(INCDIR)main.h\
-		 $(INCDIR)ioq.h\
-		 $(INCDIR)net.h\
-		 $(INCDIR)gfx.h
-SRCS=$(SRCDIR)main.c\
-	 $(SRCDIR)gfx.p
-OBJS=$(OBJDIR)main.o\
-	 $(OBJDIR)ioq.o\
-	 $(OBJDIR)gfx.o
+INCS=$(INCDIR)util.h \
+	$(INCDIR)streams.h \
+	$(INCDIR)net.h \
+	$(INCDIR)view.h \
+	$(INCDIR)main.h 
+
+SRCS=$(SRCDIR)net.c \
+	$(SRCDIR)streams.c \
+	$(SRCDIR)view.c \
+	$(SRCDIR)main.c 
+
+OBJS=$(OBJDIR)net.o \
+	$(OBJDIR)streams.o \
+	$(OBJDIR)view.o \
+	$(OBJDIR)main.o 
+
 PROGRAM=$(BINDIR)$(TARGET)
 
 all:$(PROGRAM)
 
-## $(OBJDIR)%.o:$(SRCDIR)%.cpp $(INCLUDES)
-$(OBJDIR)%.o:%(SRCDIR)%.c $(INCLUDES)
+$(OBJDIR)%.o:$(SRCDIR)%.c $(INCs)
 	@echo Compiling $@
-	$(CPP) $(CPPFLAGS) -c -o $@ $<
-	## $(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+# $(CPP) $(CPPFLAGS) -c -o $@ $<
 
 $(PROGRAM):$(OBJS)
 	@echo Linking $(PROGRAM)
-	## $(CXX) -o $(PROGRAM) $(OBJS) $(LIBS)
-	$(CPP) -o $(PROGRAM) $(OBJS) $(LIBS)
+	$(CXX) -o $(PROGRAM) $(OBJS) $(LIBS)
+# $(CPP) -o $(PROGRAM) $(OBJS) $(LIBS)
 
 check:
 	@echo "TODO: Check dependencies"
-	@gcc --version
-	## clang++ --version
+	@$(CPP) --version
+	@$(CXX) --version
 
 clean:
 	@echo Cleaning $(PROGRAM) $(OBJS)

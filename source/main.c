@@ -1,11 +1,14 @@
-/** Include standard i/o channels */
-#include "stdio.h"
-#include "../include/main.hpp"
+#include "../include/main.h"
 
 // Uses ENABLE_LOGGING if present
-#include "../include/utilities.hpp"
+#include "../include/util.h"
 
-#include "../include/graphics.hpp"
+#include "../include/view.h"
+
+
+/** Include standard i/o channels */
+//#include "stdio.h"
+
 
 /** 
  * Program entry point
@@ -16,8 +19,10 @@
 int main(int argc, const char **argv){
 	LOG_ME();
 
-	Display disp(400,400,"Untitled Window");
-	while(Display::digestEvents(&disp.win)){
+	View view(View::DEFAULT_WIDTH,
+			View::DEFAULT_HEIGHT,
+			"Untitled Window");
+	while(View::digestEvents(&view.win)){
 		
 		// TODO
 	}

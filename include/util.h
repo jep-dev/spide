@@ -1,16 +1,16 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include <vector>
-#include <stdio.h>
+//#include <vector>
+#include "stdio.h"
 
 #if !defined(CEXT)
 	#define CEXT extern "C"
 #endif
 
 #if !defined(sz)
-	#define sz const char* //< C string shorthand.
-	#define szvec std::vector<const char*>
+	/// C string shorthand
+	#define sz const char*
 #endif
 
 #if defined(ENABLE_LOGGING) && ENABLE_LOGGING
