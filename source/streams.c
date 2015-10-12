@@ -1,33 +1,30 @@
-/*#if !defined(ENABLE_LOGGING)
-#define ENABLE_LOGGING true
-#endif*/
 #include "../include/main.h"
 
 #include "../include/util.h"
 #include "../include/streams.h"
 
-#include <stdio.h>
+#include "stdio.h"
+#include "stdlib.h"
 
-int Streams::push(char *const msg) {
+int Streams_push(const char *msg) {
 	// TODO -- enqueue and defer printing
 	return puts(msg);
 }
 
-int Streams::format(char *const format, 
-		char *const msg, char *dest) {
+int Streams_format(const char *format, 
+		const char *msg, char *dest) {
 	return sprintf(dest, format, msg);
 }
 
-int Streams::fpush(
-		char *const fmt,
-		char *const msg) {
-	char *dest = new char[80];
-	int written = format(dest, fmt, msg);
+int Streams_fpush(const char *fmt,
+		const char *msg) {
+	char *dest = malloc(80*sizeof(char));
+	int written = Streams_format(fmt, msg, dest);
 	if(written<=0){
 		written = 0;
 	} else {
-		push(dest);
+		Streams_push(dest);
 	}
-	delete [] dest;
+	free(dest);
 	return written;
 }

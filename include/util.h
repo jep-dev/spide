@@ -4,8 +4,14 @@
 //#include <vector>
 #include "stdio.h"
 
-#if !defined(CEXT)
-	#define CEXT extern "C"
+#if defined(__cplusplus)
+	#if !defined(CEXT)
+		#define CEXT extern "C"
+	#endif
+#else
+	#if !defined(CEXT)
+		#define CEXT
+	#endif
 #endif
 
 #if !defined(sz)
@@ -31,6 +37,13 @@
 	#if !defined(LOG_TIME)
 		#define LOG_TIME(MSG, T) LOG("| %64s %-1d |\n", MSG, T)
 	#endif
+	#if !defined(LOG_ENV)
+		#if !defined(__cplusplus)
+			#define LOG_ENV() LOG("| %66s |\n", "Compiled as C")
+		#else
+			#define LOG_ENV() LOG("| %66S |\n", "Compiled as C++")
+		#endif
+	#endif
 #else
 	#if !defined(LOG)
 		#define LOG(...) do{} while(0) 
@@ -43,6 +56,9 @@
 	#endif
 	#if !defined(LOG_PRESS)
 		#define LOG_PRESS(MSG, X, Y) do{} while(0)
+	#endif
+	#if !defined(LOG_ENV)
+		#define LOG_ENV() do{} while(0)
 	#endif
 #endif
 

@@ -11,7 +11,7 @@ BINDIR=./build/
 
 # CSFML?=/usr/lib/x86_64-linux-gnu
 
-WFLAGS?=-Wall
+WFLAGS?=
 SHELL?=shell
 
 TARGET?=spide 
@@ -22,10 +22,13 @@ CXX?=clang++
 CXXFLAGS?=$(WFLAGS) -std=c++11 -pthread \
 		  -I../CSFML/include/
 
-CPP?=gcc# clang++, g++, etc.
+CPP=gcc
 CPPFLAGS?=$(WFLAGS)	-std=c1x -pthread \
 		  -I../CSFML/include/
 	# $(shell pkg-config --cflags sfml-graphics)
+
+CC_PROXY?=$(CPP)
+CC_PROXY_FLAGS?=$(CPPFLAGS)
 
 LIBS?=-lpthread -lGL -lGLU -lGLEW \
 	-lcsfml-graphics
@@ -54,13 +57,11 @@ all:$(PROGRAM)
 
 $(OBJDIR)%.o:$(SRCDIR)%.c $(INCs)
 	@echo Compiling $@
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
-# $(CPP) $(CPPFLAGS) -c -o $@ $<
+	$(CC_PROXY) $(CC_PROXY_FLAGS) -c -o $@ $<
 
 $(PROGRAM):$(OBJS)
 	@echo Linking $(PROGRAM)
-	$(CXX) -o $(PROGRAM) $(OBJS) $(LIBS)
-# $(CPP) -o $(PROGRAM) $(OBJS) $(LIBS)
+	$(CC_PROXY) $(OBJS) -o $(PROGRAM) $(LIBS)
 
 check:
 	@echo "TODO: Check dependencies"

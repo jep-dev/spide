@@ -1,53 +1,52 @@
-/*#if !defined(ENABLE_LOGGING)
-#define ENABLE_LOGGING true
-#endif*/
+#include <stdlib.h>
+
 #include "../include/main.h"
 // LOG*
 #include "../include/util.h"
-
 #include "../include/view.h"
 
+#include <stdlib.h>
+#include <stdbool.h>
 #include <SFML/Graphics.h>
 #include <SFML/OpenGL.h>
 
-sfRenderWindow *const View::init(void){
-	LOG_ME();
-	
-	sfVideoMode winMode = {640, 480, 32};
-	sfContextSettings winContext;
-	winContext.depthBits = 24;
-	winContext.stencilBits = 8;
-	winContext.antialiasingLevel = 2;
-	winContext.majorVersion = 3;
-	winContext.minorVersion = 0;
-	
-	sfUint8 flags = sfResize | sfClose;
-	sfRenderWindow *const win = sfRenderWindow_create(
-			winMode, "CSFML", flags, &winContext);
-
-	sfRenderWindow_setVerticalSyncEnabled(win, true);
-	sfRenderWindow_setFramerateLimit(win, 58);
+bool View_init(int width, int height, 
+		const char *title, View *view){
+//	LOG_ME();
+	sfRenderWindow *window = view -> window;
+	sfRenderWindow_setVerticalSyncEnabled(
+			window, true);
+	sfRenderWindow_setFramerateLimit(
+			window, 58);
 
 	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE); // TODO -- check windings
-	return win;
+	glDisable(GL_CULL_FACE); // TODO
+
+	return true;
 }
 
-bool View::digestKeyPress(sfWindow *const win,
-		const sfKeyEvent &ev) {
-	switch(ev.code){
+void View_quit(View *view){
+//	LOG_ME();
+	sfRenderWindow_close(view -> window);
+	//free(view);
+}
+
+bool View_digestKeyPress(sfRenderWindow *win,
+		const sfKeyEvent *ev) {
+	switch(ev -> code){
 		case sfKeyEscape:
+			// Exit FS? Prompt for close?
 			return false;
 		
-		case sfKeyF4: case sfKeyF11:
-		
+		case sfKeyF4: // Toggle FS
+		case sfKeyF11: // Toggle FS
 
 		default:
 			return true; 
 	}
 }
 
-bool View::digestMousePress(sfWindow *const win, 
+bool View_digestMousePress(sfRenderWindow *win, 
 		int x, int y, sfMouseButton button) {
 	switch(button){
 		case sfMouseLeft:
@@ -66,24 +65,24 @@ bool View::digestMousePress(sfWindow *const win,
 	return true; 
 }
 
-bool View::digestEvent(sfWindow *const win, 
-		const sfEvent &ev){
-	switch(ev.type){
-		case sfEventClosed:
+bool View_digestEvent(sfRenderWindow *win, 
+		const sfEvent *ev){
+	switch(ev -> type){
+		case sfEvtClosed:
 			return false;
 			break;
-		case sfEventResized: 
-			glViewport(0, 0, ev.size.width, 
-					ev.size.height);
+		case sfEvtResized: 
+			glViewport(0, 0, ev -> size.width, 
+					ev -> size.height);
 			break; 
-		case sfEventMouseButtonPressed: {
-			const sfEventMouseButtonEvent mbev 
-				= ev.mouseButton;
-			return digestMousePress(win, 
+		case sfEvtMouseButtonPressed: {
+			const sfMouseButtonEvent mbev 
+				= ev -> mouseButton;
+			return View_digestMousePress(win, 
 					mbev.x, mbev.y, mbev.button);
 			}
-		case sfEventKeyPressed:
-			return digestKeyPress(win, ev.key);
+		case sfEvtKeyPressed:
+			return View_digestKeyPress(win, &(ev -> key));
 			break;
 		default:
 			break; 
@@ -91,21 +90,21 @@ bool View::digestEvent(sfWindow *const win,
 	return true; 
 }
 
-bool View::digestEvents(sfWindow *const win) {
+bool View_digestEvents(sfRenderWindow *win) {
 	sfEvent ev;
-	sfWindow_setActive(win, true);
+	sfRenderWindow_setActive(win, true);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); 
-	while(sfWindow_isOpen(win) 
-			&& sfWindow_pollEvent(win,ev)){
-		if(!digestEvent(win, ev))
+	while(sfRenderWindow_isOpen(win) 
+			&& sfRenderWindow_pollEvent(win, &ev)){
+		if(!View_digestEvent(win, &ev))
 			return false;
-		draw(win, 0);
+		View_draw(win, 0);
 	}
 	return true; 
 }
 
-void View::draw(sfWindow *const win, int ticks) {
-	sfWindow_setActive(win, true);
+void View_draw(sfRenderWindow *win, int ticks) {
+	sfRenderWindow_setActive(win, true);
 	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -126,6 +125,6 @@ void View::draw(sfWindow *const win, int ticks) {
 	glEnd();
 	
 	glTranslatef(0,-2,0);
-	sfWindow_display(win);
+	sfRenderWindow_display(win);
 	//win -> display();
 }
