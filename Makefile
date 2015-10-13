@@ -23,30 +23,31 @@ CXXFLAGS?=$(WFLAGS) -std=c++11 -pthread \
 		  -I../CSFML/include/
 
 CPP=gcc
-CPPFLAGS?=$(WFLAGS)	-std=c1x -pthread \
+CPPFLAGS?=$(WFLAGS)	-std=c99 -pthread \
 		  -I../CSFML/include/
 	# $(shell pkg-config --cflags sfml-graphics)
 
 CC_PROXY?=$(CPP)
 CC_PROXY_FLAGS?=$(CPPFLAGS)
 
-LIBS?=-lpthread -lGL -lGLU -lGLEW \
+LIBS?=-lpthread -lGL -lGLU \
 	-lcsfml-graphics
-	# -lsfml-system -lsfml-graphics
-	# $(shell pkg-config --libs python3 sfml-graphics) 
 
 INCS=$(INCDIR)util.h \
+	$(INCDIR)log.h \
 	$(INCDIR)streams.h \
 	$(INCDIR)net.h \
 	$(INCDIR)view.h \
 	$(INCDIR)main.h 
 
 SRCS=$(SRCDIR)net.c \
+	 $(SRCDIR)log.c \
 	$(SRCDIR)streams.c \
 	$(SRCDIR)view.c \
 	$(SRCDIR)main.c 
 
 OBJS=$(OBJDIR)net.o \
+	$(OBJDIR)log.o \
 	$(OBJDIR)streams.o \
 	$(OBJDIR)view.o \
 	$(OBJDIR)main.o 

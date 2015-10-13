@@ -6,14 +6,12 @@
 #endif
 
 #include "../include/util.h"
-//#include <vector>
-//#include <iostream>
 
-int Streams_push(const char *msg);
-int Streams_format(const char *format,
-		const char *msg, char *dest);
-int Streams_fpush(const char *format, 
-		const char *msg);
+int Streams_push(cstr msg);
 
+//int Streams_format(cstr format, 
+//		cstr msg, str dest);
+
+int Streams_fpush(int n, cstr format, ...);
 
 #endif

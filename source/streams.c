@@ -1,30 +1,37 @@
 #include "../include/main.h"
-
-#include "../include/util.h"
 #include "../include/streams.h"
+#include "../include/util.h"
 
+#include "stdarg.h"
 #include "stdio.h"
 #include "stdlib.h"
 
-int Streams_push(const char *msg) {
+int Streams_push(cstr msg) {
 	// TODO -- enqueue and defer printing
-	return puts(msg);
+	int output = puts(msg);
+	fflush(stdout);
+	return output;
 }
 
-int Streams_format(const char *format, 
-		const char *msg, char *dest) {
-	return sprintf(dest, format, msg);
-}
+/*int Streams_format(cstr format, 
+		cstr msg, char *dest) {
+	// TODO: remove?
+	return output = sprintf(dest, format, msg);
+}*/
 
-int Streams_fpush(const char *fmt,
-		const char *msg) {
-	char *dest = malloc(80*sizeof(char));
-	int written = Streams_format(fmt, msg, dest);
-	if(written<=0){
-		written = 0;
-	} else {
-		Streams_push(dest);
+int Streams_fpush(int n, cstr szFormat, ...) {
+	const int consoleSize = 70, bufferSize = 1024;
+	str szFull = malloc(bufferSize * sizeof(char));
+	
+	va_list args; // '...' unpacking
+	va_start(args, szFormat);
+	int total = vsprintf(szFull, szFormat, args);
+	va_end(args);
+	for(int i = 0; i < total; i += consoleSize) {
+		cstr line = &szFull[i];
+		Streams_push(line);
 	}
-	free(dest);
-	return written;
+	
+	//free(szFull);
+	return total;
 }

@@ -3,6 +3,7 @@
 #include "../include/main.h"
 // LOG*
 #include "../include/util.h"
+#include "../include/log.h"
 #include "../include/view.h"
 
 #include <stdlib.h>
@@ -10,9 +11,10 @@
 #include <SFML/Graphics.h>
 #include <SFML/OpenGL.h>
 
-bool View_init(int width, int height, 
+extern bool View_init(int width, int height, 
 		const char *title, View *view){
-//	LOG_ME();
+	LOG_FUNC(__FILE__, 
+			__PRETTY_FUNCTION__, __LINE__-1);
 	sfRenderWindow *window = view -> window;
 	sfRenderWindow_setVerticalSyncEnabled(
 			window, true);
@@ -25,10 +27,10 @@ bool View_init(int width, int height,
 	return true;
 }
 
-void View_quit(View *view){
-//	LOG_ME();
+extern void View_quit(View *view){
+	LOG_FUNC(__FILE__, 
+			__PRETTY_FUNCTION__, __LINE__-1);
 	sfRenderWindow_close(view -> window);
-	//free(view);
 }
 
 bool View_digestKeyPress(sfRenderWindow *win,
@@ -36,13 +38,11 @@ bool View_digestKeyPress(sfRenderWindow *win,
 	switch(ev -> code){
 		case sfKeyEscape:
 			// Exit FS? Prompt for close?
-			return false;
-		
+			return false; //< Quit gracefully
 		case sfKeyF4: // Toggle FS
 		case sfKeyF11: // Toggle FS
-
-		default:
-			return true; 
+		default: // catchall 
+			return true;
 	}
 }
 
@@ -50,16 +50,16 @@ bool View_digestMousePress(sfRenderWindow *win,
 		int x, int y, sfMouseButton button) {
 	switch(button){
 		case sfMouseLeft:
-			LOG_PRESS("Left press", x, y);
+			LOG_PRESS("Left", x, y);
 			break;
 		case sfMouseMiddle:
-			LOG_PRESS("Middle press", x, y);
+			LOG_PRESS("Middle", x, y);
 			break; 
-			case sfMouseRight:
-			LOG_PRESS("Right press", x, y);
+		case sfMouseRight:
+			LOG_PRESS("Right", x, y);
 			break;
 		default:
-			LOG_PRESS("Other press", x, y);
+			LOG_PRESS("Other", x, y);
 			break; 
 	}
 	return true; 
