@@ -10,7 +10,7 @@ available for Linux and Windows, and this source
 should be platform-independent. By version 0.1, cross-
 compiled versions should be tested and available. 
 
-### Building 
+### Building    
 <table><tr>
 <td>verbose</td>
 <td><code>make</code></td>
@@ -22,9 +22,9 @@ compiled versions should be tested and available.
 <td><code>make &gt;/dev/null</code></td>
 </tr></table>
 
-### Usage
-<br>
-<code>./build/spide</code>
+### Usage    
+
+<code>./build/spide</code>    
 
 
 ### Structure

@@ -12,6 +12,6 @@
 #include "../include/util.h"
 #include "../include/log.h"
 
-CEXT int main(int argc, const char **argv); 
+extern int main(int argc, const char **argv); 
 
 #endif

@@ -14,7 +14,7 @@
 extern bool View_init(int width, int height, 
 		const char *title, View *view){
 	LOG_FUNC(__FILE__, 
-			__PRETTY_FUNCTION__, __LINE__-1);
+			__FUNCTION__, __LINE__-1);
 	sfRenderWindow *window = view -> window;
 	sfRenderWindow_setVerticalSyncEnabled(
 			window, true);
