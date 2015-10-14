@@ -23,13 +23,7 @@ compiled versions should be tested and available.
 </tr></table>
 
 ### Usage
-<table><tr>
-<td>Direct (from ./)</td>
-<td><code>./build/spide</code></td>
-</tr><tr>
-<td>Python (from ./build)</td>
-<td><code>python3 ./linux.py</code></td>
-</tr></table>
+<code>./build/spide</code>
 
 ### Structure
 <table>
