@@ -15,8 +15,9 @@
  * \param argv Command line arguments, app. name first.
  * \return 0 success / 1 failure */
 extern int main(int argc, const char **argv){
+	LOG("\n");
 	LOG_SYSTEM();
-	LOG_FUNC(__FILE__, __func__, __LINE__-2);
+	LOG_FUNC(__FILE__, __PRETTY_FUNCTION__, __LINE__-2);
 
 	sfVideoMode mode = {
 		.width = 640,
