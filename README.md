@@ -5,6 +5,33 @@ by mapping different aspects of development to spatial
 representations, like the 'mind maps' used to improve
 memory.
 
+Everything is configured for Linux, but CSFML is
+available for Linux and Windows, and this source 
+should be platform-independent. By version 0.1, cross-
+compiled versions should be tested and available. 
+
+### Building 
+<table><tr>
+<td>verbose</td>
+<td><code>make</code></td>
+</tr><tr>
+<td>quiet</td>
+<td><code>make -s</code></td>
+</tr><tr>
+<td>silent</td>
+<td><code>make &gt;/dev/null</code></td>
+</tr></table>
+
+### Usage
+<table><tr>
+<td>Direct (from ./)</td>
+<td><code>./build/spide</code></td>
+</tr><tr>
+<td>Python (from ./build)</td>
+<td><code>python3 ./linux.py</code></td>
+</tr></table>
+
+### Structure
 <table>
 <tr>
 	<th>./include/</th>
