@@ -8,7 +8,7 @@
 
 int Streams_push(cstr msg) {
 	// TODO -- enqueue and defer printing
-	int output = puts(msg);
+	int output = printf("%s", msg);
 	fflush(stdout);
 	return output;
 }
@@ -21,17 +21,22 @@ int Streams_push(cstr msg) {
 
 int Streams_fpush(int n, cstr szFormat, ...) {
 	const int consoleSize = 70, bufferSize = 1024;
-	str szFull = malloc(bufferSize * sizeof(char));
+	//str szFull = malloc(bufferSize * sizeof(char));
 	
+	str szBuffer = malloc(bufferSize * sizeof(char));
+
+
 	va_list args; // '...' unpacking
 	va_start(args, szFormat);
-	int total = vsprintf(szFull, szFormat, args);
+	int total = vprintf(szFormat, args);
+	//int total = vsprintf(szBuffer, szFormat, args);
 	va_end(args);
+/*
 	for(int i = 0; i < total; i += consoleSize) {
-		cstr line = &szFull[i];
+		cstr line = &szBuffer[i];
 		Streams_push(line);
-	}
+	}*/
 	
-	//free(szFull);
+	free(szBuffer);
 	return total;
 }

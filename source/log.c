@@ -18,7 +18,7 @@ int LOG(cstr format, ...) {
 int LOG_FUNC(cstr szFile, cstr szFunc, int line) {
 	// TODO return LOG(...)?
 	return Streams_fpush(3, "| %66s |\n"
-			"| %-55s | Line %3d |",
+			"| %-55s | Line %3d |\n",
 			szFile, szFunc, line);
 }
 
@@ -30,8 +30,8 @@ int LOG_PRESS(cstr szLabel, int x, int y) {
 int LOG_SYSTEM(void) {
 	// TODO return LOG(...)?
 	#if defined(__cplusplus)
-		return Streams_fpush(1, "| %66s |", "Compiled as C++.");
+		return Streams_fpush(1, "| %66s |\n", "Compiled as C++.");
 	#else
-		return Streams_fpush(1, "| %66s |", "Compiled as C.");
+		return Streams_fpush(1, "| %66s |\n", "Compiled as C.");
 	#endif
 }

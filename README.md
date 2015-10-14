@@ -1,10 +1,9 @@
-# **Sp**atial **I**ntegrated **D**evelopment **E**nvironment
+# (Sp)atial (I)ntegrated (D)evelopment (E)nvironment
 
 This is a C application intended to improve workflow
 by mapping different aspects of development to spatial 
 representations, like the 'mind maps' used to improve
 memory.
-
 
 <table>
 <tr>
