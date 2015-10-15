@@ -1,4 +1,4 @@
-# (Sp)atial (I)ntegrated (D)evelopment (E)nvironment
+<h1>(Sp)atial (I)ntegrated (D)evelopment (E)nvironment</h1>
 
 This is a C application intended to improve workflow
 by mapping different aspects of development to spatial 
@@ -22,46 +22,52 @@ compiled versions should be tested and available.
 	<td><code>make &gt;/dev/null</code></td>
 </tr></table>
 
-<br>
-
 <h3>Usage</h3>
-<pre>
-	<code>./build/spide</code>   
-</pre>
+<table><tr>
+	<th>Linux</th><th>Windows (todo)</th>
+</tr><tr>
+	<td><code>./build/spide</code></td>
+	<td><code>./build/spide.exe</code></td>
+</tr></table>
 
 <h3>Structure</h3>
 
-<br>
 <table>
 <tr>
-	<th>./include/</th>
-	<th>./source/</th>
-	<th>./build/</th>
+	<th>$(INCIDR)</th>
+	<th>$(SRCDIR)</th>
+	<th>$(OBJDIR)</th>
+	<th>$(BINDIR)</th>
 	<th>Description</th>
 </tr><tr>
 	<td>util.h</td>
+	<td></td>
 	<td></td>
 	<td></td>
 	<td>Utilities and macros</td>
 </tr><tr>
 	<td>streams.h</td>
 	<td>streams.c</td>
+	<td>streams.o</td>
 	<td></td>
 	<td>Printing and stream operators</td>
 </tr><tr>
 	<td>log.h</td>
 	<td>log.c</td>
+	<td>log.o</td>
 	<td></td>
 	<td>Logging to stdout or an external file.</td>
 </tr><tr>
 	<td>net.h</td>
 	<td>net.c</td>
+	<td>net.o</td>
 	<td></td>
 	<td>Network tools (todo)</td>
 </tr><tr>
 	<td>view.h</td>
 	<td>view.c</td>
-	<td></td>
+	<td>view.o</td>
+	</td>
 	<td>Graphics module - rendering and UI</td>
 </tr><tr>
 	<td>main.h</td>
