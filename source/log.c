@@ -23,15 +23,30 @@ int LOG_FUNC(cstr szFile, cstr szFunc, int line) {
 }
 
 int LOG_PRESS(cstr szLabel, int x, int y) {
-	return printf("| %46s press | %4d | %4d |\n",
-			szLabel, x, y);
+	return Streams_fpush(3, "| %47s press "
+			"(%4d, %-4d) |\n", szLabel, x, y);
 }
 
 int LOG_SYSTEM(void) {
 	// TODO return LOG(...)?
+	int output = 0;
+	cstr szFormat = "| %38s %-27s |\n";
 	#if defined(__cplusplus)
-		return Streams_fpush(1, "| %66s |\n", "Compiled as C++.");
+		cstr szCompiled = "Compiled as C++ for";
 	#else
-		return Streams_fpush(1, "| %66s |\n", "Compiled as C.");
+		cstr szCompiled = "Compiled as C for";
 	#endif
+
+	#if defined(__linux__)
+		cstr szOS = "Linux.";
+	#elif defined(_WIN64)
+		cstr szOS = "64-bit Windows.";
+	#elif defined(_WIN32)
+		cstr szOS = "32-bit or 64-bit Windows.";
+	#else
+		cstr szOS = "undefined operating system.";
+	#endif
+
+	return Streams_fpush(3, szFormat, 
+			szCompiled, szOS);
 }
