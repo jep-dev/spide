@@ -41,38 +41,44 @@ compiled versions should be tested and available.
 	<th>Description</th>
 </tr><tr>
 	<td>util.h</td>
-	<td COLSPAN=3></td>
+	<td COLSPAN=2></td>
+	<td ROWSPAN=6></td>
 	<td>Utilities and macros</td>
 </tr><tr>
 	<td>streams.h</td>
 	<td>streams.c</td>
 	<td>streams.o</td>
-	<td></td>
 	<td>Printing and stream operators</td>
 </tr><tr>
 	<td>log.h</td>
 	<td>log.c</td>
 	<td>log.o</td>
-	<td></td>
 	<td>Logging to stdout or an external file.</td>
 </tr><tr>
 	<td>net.h</td>
 	<td>net.c</td>
 	<td>net.o</td>
-	<td></td>
 	<td>Network tools (todo)</td>
 </tr><tr>
 	<td>view.h</td>
 	<td>view.c</td>
 	<td>view.o</td>
-	<td></td>
 	<td>Graphics module - rendering and UI</td>
 </tr><tr>
 	<td>main.h</td>
 	<td>main.c</td>
 	<td>main.o</td>
-	<td></td>
 	<td>Application entry point</td>
+</tr><tr>
+	<td COLSPAN=3 ROWSPAN=3></td>
+	<td>spide</td>
+	<td>Linux executable</td>
+</tr><tr>
+	<td>spide32.exe</td>
+	<td>32-bit Windows executable (todo)</td>
+</tr><tr>
+	<td>spide64.exe</td>
+	<td>64-bit Windows executable (todo)</td>
 </tr></table>
 
 
