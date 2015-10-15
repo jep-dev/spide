@@ -41,9 +41,7 @@ compiled versions should be tested and available.
 	<th>Description</th>
 </tr><tr>
 	<td>util.h</td>
-	<td></td>
-	<td></td>
-	<td></td>
+	<td COLSPAN=3></td>
 	<td>Utilities and macros</td>
 </tr><tr>
 	<td>streams.h</td>
@@ -67,11 +65,12 @@ compiled versions should be tested and available.
 	<td>view.h</td>
 	<td>view.c</td>
 	<td>view.o</td>
-	</td>
+	<td></td>
 	<td>Graphics module - rendering and UI</td>
 </tr><tr>
 	<td>main.h</td>
 	<td>main.c</td>
+	<td>main.o</td>
 	<td></td>
 	<td>Application entry point</td>
 </tr></table>
