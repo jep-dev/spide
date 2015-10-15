@@ -29,8 +29,8 @@ compiled versions should be tested and available.
 	<th>Windows (64-bit) (todo)</th>
 </tr><tr>
 	<td><code>./build/spide</code></td>
-	<td><s><code>./build/spide32.exe</code></s></td>
-	<td><s><code>./build/spide64.exe</code></s></td>
+	<td><s>./build/spide32.exe</s></td>
+	<td><s>./build/spide64.exe</s></td>
 </tr></table>
 
 <h3>Structure</h3>
