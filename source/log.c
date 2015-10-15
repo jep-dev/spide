@@ -16,6 +16,10 @@ int LOG(cstr format, ...) {
 	return 0; // ?
 }
 
+int LOG_PARA(cstr szPara) {
+	return 0; // TODO
+}
+
 int LOG_FUNC(cstr szFile, cstr szFunc, int line) {
 /*#ifndef ENABLE_LOGGING
 	return 0;
@@ -36,6 +40,9 @@ int LOG_PRESS(cstr szLabel, int x, int y) {
 }
 
 int LOG_SYSTEM(void) {
+#ifdef ENABLE_LOGGING
+	printf("| %-66s |\n", "ENABLE_LOGGING defined");
+#endif
 	char szBuffered[66];
 	strcpy(szBuffered, "Compiled as C");
 	

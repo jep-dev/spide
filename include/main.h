@@ -3,9 +3,9 @@
 
 // #define SFML_DYNAMIC
 
-/*#if !defined(ENABLE_LOGGING)
+#if !defined(ENABLE_LOGGING)
 	#define ENABLE_LOGGING true
-#endif*/
+#endif
 
 
 #define ENABLE_LOGGING true

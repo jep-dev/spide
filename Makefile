@@ -18,20 +18,17 @@ SHELL?=shell
 TARGET?=x86_64-linux-gnu
 
 RM?=rm
-MKDIR?=mkdir -p
 
 #ifeq "$(OS)" "Windows_NT"
 #	# Windows, assume 32-bit
 #	LDFLAGS?=-lopengl32 -lglu32 -lcsfml32
 #	EXE?=$(BINDIR)spide.exe
-#else
-#	# Assume Linux
+#else #assume Linux
+#endif
 
 LDFLAGS?=-lpthread -lGL -lGLU \
 	-L$(CSFML_LIB) -lcsfml-graphics
 EXE?=$(BINDIR)spide
-
-#endif
 
 CC?=gcc
 CXX?=clang++
@@ -57,12 +54,10 @@ all:$(EXE)
 
 $(OBJDIR)%.o:$(SRCDIR)%.c $(INCS)
 	@echo Compiling $@
-	@$(MKDIR) $(OBJDIR)
 	$(CC_PROXY) $(CC_PROXY_FLAGS) -c -o $@ $<
 
 $(EXE):$(OBJS)
 	@echo Linking $(EXE)
-	@$(MKDIR) $(BINDIR)
 	$(CC_PROXY) $(OBJS) -o $(EXE) $(LDFLAGS)
 
 check:
@@ -74,8 +69,8 @@ clean:
 	@echo Cleaning $(EXE) $(OBJS)
 	@$(RM) -f $(EXE) $(OBJS) 
 
-do:$(PROGRAM)
-	@echo "Running" $(EXE)
+do:$(EXE)
+	@echo "Running $(EXE)"
 	@$(EXE)
 
 .PHONY: all clean check install do

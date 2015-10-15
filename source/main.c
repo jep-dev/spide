@@ -8,7 +8,13 @@
 
 #include "../include/view.h"
 
+#include <stdlib.h>
 #include <SFML/Window.h>
+
+extern void exitCB(void) {
+	LOG_FUNC(__FILE__, __PRETTY_FUNCTION__,
+			__LINE__-1);
+}
 
 /**\brief Program entry point
  * \param argc Number of arguments, 1 or greater.
@@ -18,7 +24,7 @@ extern int main(int argc, const char **argv){
 	LOG("\n");
 	LOG_SYSTEM();
 	LOG_FUNC(__FILE__, __PRETTY_FUNCTION__, __LINE__-2);
-
+	atexit(&exitCB);
 	sfVideoMode mode = {
 		.width = 640,
 		.height = 480,

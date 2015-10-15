@@ -14,7 +14,7 @@
 extern bool View_init(int width, int height, 
 		const char *title, View *view){
 	LOG_FUNC(__FILE__, 
-			__FUNCTION__, __LINE__-1);
+			__PRETTY_FUNCTION__, __LINE__-1);
 	sfRenderWindow *window = view -> window;
 	sfRenderWindow_setVerticalSyncEnabled(
 			window, true);
@@ -50,16 +50,16 @@ bool View_digestMousePress(sfRenderWindow *win,
 		int x, int y, sfMouseButton button) {
 	switch(button){
 		case sfMouseLeft:
-			LOG_PRESS("Left", x, y);
+			//LOG_PRESS("Left", x, y);
 			break;
 		case sfMouseMiddle:
-			LOG_PRESS("Middle", x, y);
+			//LOG_PRESS("Middle", x, y);
 			break; 
 		case sfMouseRight:
-			LOG_PRESS("Right", x, y);
+			//LOG_PRESS("Right", x, y);
 			break;
 		default:
-			LOG_PRESS("Other", x, y);
+			//LOG_PRESS("Other", x, y);
 			break; 
 	}
 	return true; 
