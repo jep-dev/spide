@@ -23,8 +23,8 @@ int Streams_fpush(int n, cstr szFormat, ...) {
 	const int consoleSize = 70, bufferSize = 1024;
 	//str szFull = malloc(bufferSize * sizeof(char));
 	
-	str szBuffer = malloc(bufferSize * sizeof(char));
-
+	str szBuffer = (str) malloc(bufferSize 
+			* sizeof(char));
 
 	va_list args; // '...' unpacking
 	va_start(args, szFormat);
