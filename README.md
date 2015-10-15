@@ -24,10 +24,13 @@ compiled versions should be tested and available.
 
 <h3>Usage</h3>
 <table><tr>
-	<th>Linux</th><th>Windows (todo)</th>
+	<th>Linux</th>
+	<th>Windows (32-bit) (todo)</th>
+	<th>Windows (64-bit) (todo)</th>
 </tr><tr>
 	<td><code>./build/spide</code></td>
-	<td><code>./build/spide.exe</code></td>
+	<td><s><code>./build/spide32.exe</code></s></td>
+	<td><s><code>./build/spide64.exe</code></s></td>
 </tr></table>
 
 <h3>Structure</h3>
@@ -74,10 +77,10 @@ compiled versions should be tested and available.
 	<td>spide</td>
 	<td>Linux executable</td>
 </tr><tr>
-	<td>spide32.exe</td>
+	<td><s>spide32.exe</s></td>
 	<td>32-bit Windows executable (todo)</td>
 </tr><tr>
-	<td>spide64.exe</td>
+	<td><s>spide64.exe</s></td>
 	<td>64-bit Windows executable (todo)</td>
 </tr></table>
 
