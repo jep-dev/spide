@@ -22,12 +22,17 @@ compiled versions should be tested and available.
 <td><code>make &gt;/dev/null</code></td>
 </tr></table>
 
+<br>
+
 ### Usage    
 
+<pre>
 <code>./build/spide</code>    
+</pre>
 
+### Structure   
 
-### Structure
+<br>
 <table>
 <tr>
 	<th>./include/</th>
