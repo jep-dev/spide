@@ -1,80 +1,81 @@
 # Discovery paths for sources and headers
-vpath %.cpp $(SRCDIR)
-vpath   %.c $(SRCDIR)
-vpath %.hpp $(INCDIR)
-vpath   %.h $(INCDIR)
-
 INCDIR=./include/
 SRCDIR=./source/
 OBJDIR=./objects/
 BINDIR=./build/
 
-# CSFML?=/usr/lib/x86_64-linux-gnu
+vpath %.cpp $(SRCDIR)
+vpath   %.c $(SRCDIR)
+vpath %.hpp $(INCDIR)
+vpath   %.h $(INCDIR)
+
+# CSFML?=
+CSFML_SRC?=../CSFML/include/
+CSFML_LIB?=/usr/lib/x86_64-linux-gnu/
 
 WFLAGS?=
 SHELL?=shell
+TARGET?=x86_64-linux-gnu
 
-TARGET?=spide 
+RM?=rm
+MKDIR?=mkdir -p
 
-CSFML?=/usr/lib/x86_64-linux-gnu/
+#ifeq "$(OS)" "Windows_NT"
+#	# Windows, assume 32-bit
+#	LDFLAGS?=-lopengl32 -lglu32 -lcsfml32
+#	EXE?=$(BINDIR)spide.exe
+#else
+#	# Assume Linux
 
+LDFLAGS?=-lpthread -lGL -lGLU \
+	-L$(CSFML_LIB) -lcsfml-graphics
+EXE?=$(BINDIR)spide
+
+#endif
+
+CC?=gcc
 CXX?=clang++
-CXXFLAGS?=$(WFLAGS) -std=c++11 -pthread \
-		  -I../CSFML/include/
+CFLAGS?=-g -pthread -I$(CSFML_SRC)
+CXXFLAGS?=$(WFLAGS) -pthread -I$(CSFML_SRC)
 
-CPP=gcc
-CPPFLAGS?=$(WFLAGS)	-std=c99 -pthread \
-		  -I../CSFML/include/
-	# $(shell pkg-config --cflags sfml-graphics)
+CC_PROXY?=$(CC)
+CC_PROXY_FLAGS?=$(CFLAGS)
 
-CC_PROXY?=$(CPP)
-CC_PROXY_FLAGS?=$(CPPFLAGS)
+INCS=util.h log.h streams.h net.h\
+	view.h main.h
 
-LIBS?=-lpthread -lGL -lGLU \
-	-lcsfml-graphics
+SRCS=log.c streams.c net.c\
+	 view.c main.c
 
-INCS=$(INCDIR)util.h \
-	$(INCDIR)log.h \
-	$(INCDIR)streams.h \
-	$(INCDIR)net.h \
-	$(INCDIR)view.h \
-	$(INCDIR)main.h 
+OBJS=$(OBJDIR)log.o\
+	$(OBJDIR)streams.o\
+	$(OBJDIR)net.o\
+	$(OBJDIR)view.o\
+	$(OBJDIR)main.o
 
-SRCS=$(SRCDIR)net.c \
-	 $(SRCDIR)log.c \
-	$(SRCDIR)streams.c \
-	$(SRCDIR)view.c \
-	$(SRCDIR)main.c 
+all:$(EXE)
 
-OBJS=$(OBJDIR)net.o \
-	$(OBJDIR)log.o \
-	$(OBJDIR)streams.o \
-	$(OBJDIR)view.o \
-	$(OBJDIR)main.o 
-
-PROGRAM=$(BINDIR)$(TARGET)
-
-all:$(PROGRAM)
-
-$(OBJDIR)%.o:$(SRCDIR)%.c $(INCs)
+$(OBJDIR)%.o:$(SRCDIR)%.c $(INCS)
 	@echo Compiling $@
+	@$(MKDIR) $(OBJDIR)
 	$(CC_PROXY) $(CC_PROXY_FLAGS) -c -o $@ $<
 
-$(PROGRAM):$(OBJS)
-	@echo Linking $(PROGRAM)
-	$(CC_PROXY) $(OBJS) -o $(PROGRAM) $(LIBS)
+$(EXE):$(OBJS)
+	@echo Linking $(EXE)
+	@$(MKDIR) $(BINDIR)
+	$(CC_PROXY) $(OBJS) -o $(EXE) $(LDFLAGS)
 
 check:
 	@echo "TODO: Check dependencies"
-	@$(CPP) --version
+	@$(CC) --version
 	@$(CXX) --version
 
 clean:
-	@echo Cleaning $(PROGRAM) $(OBJS)
-	@rm -f $(PROGRAM) $(OBJS) 
+	@echo Cleaning $(EXE) $(OBJS)
+	@$(RM) -f $(EXE) $(OBJS) 
 
 do:$(PROGRAM)
-	@echo "Running" $(PROGRAM)
-	@$(PROGRAM)
+	@echo "Running" $(EXE)
+	@$(EXE)
 
 .PHONY: all clean check install do
