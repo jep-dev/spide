@@ -10,27 +10,26 @@ available for Linux and Windows, and this source
 should be platform-independent. By version 0.1, cross-
 compiled versions should be tested and available. 
 
-### Building    
+<h3>Building</h3>
 <table><tr>
-<td>verbose</td>
-<td><code>make</code></td>
+	<td>verbose</td>
+	<td><code>make</code></td>
 </tr><tr>
-<td>quiet</td>
-<td><code>make -s</code></td>
+	<td>quiet</td>
+	<td><code>make -s</code></td>
 </tr><tr>
-<td>silent</td>
-<td><code>make &gt;/dev/null</code></td>
+	<td>silent</td>
+	<td><code>make &gt;/dev/null</code></td>
 </tr></table>
 
 <br>
 
-### Usage    
-
+<h3>Usage</h3>
 <pre>
-<code>./build/spide</code>    
+	<code>./build/spide</code>   
 </pre>
 
-### Structure   
+<h3>Structure</h3>
 
 <br>
 <table>
@@ -69,12 +68,6 @@ compiled versions should be tested and available.
 	<td>main.c</td>
 	<td></td>
 	<td>Application entry point</td>
-</tr><tr>
-	<td></td>
-	<td></td>
-	<td>linux.py</td>
-	<td>Network tools (todo)</td>
-</tr>
-</table>
+</tr></table>
 
 
