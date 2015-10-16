@@ -31,6 +31,11 @@ compiled versions should be tested and available.
 	<td><code>./build/spide</code></td>
 	<td><s>./build/spide32.exe</s></td>
 	<td><s>./build/spide64.exe</s></td>
+</tr><tr>
+	<td COLSPAN=3><center>
+		<code>make do</code><br>
+		<code>make -s do</code>
+	</td>
 </tr></table>
 
 <h3>Structure</h3>
@@ -82,11 +87,6 @@ compiled versions should be tested and available.
 </tr><tr>
 	<td><s>spide64.exe</s></td>
 	<td>64-bit Windows executable (todo)</td>
-</tr><tr>
-	<td COLSPAN=3><center>
-		<code>make do</code>,
-		<code>make -s do</code>
-	</td>
 </tr></table>
 
 
