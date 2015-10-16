@@ -8,4 +8,6 @@ config
 build/*
 !build/*.py
 
+*.swp
+
 objects/*
