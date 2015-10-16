@@ -47,15 +47,15 @@ compiled versions should be tested and available.
 	<td ROWSPAN=6></td>
 	<td>Utilities and macros</td>
 </tr><tr>
-	<td>streams.h</td>
-	<td>streams.c</td>
-	<td>streams.o</td>
-	<td>Printing and stream operators</td>
-</tr><tr>
 	<td>log.h</td>
 	<td>log.c</td>
 	<td>log.o</td>
 	<td>Logging to stdout or an external file.</td>
+</tr><tr>
+	<td>streams.h</td>
+	<td>streams.c</td>
+	<td>streams.o</td>
+	<td>Printing and stream operators</td>
 </tr><tr>
 	<td>net.h</td>
 	<td>net.c</td>
