@@ -1,6 +1,5 @@
-#include "../include/main.h"
-#include "../include/streams.h"
 #include "../include/util.h"
+#include "../include/streams.h"
 
 #include "stdarg.h"
 #include "stdio.h"

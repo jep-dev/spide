@@ -2,17 +2,14 @@
 #define LOG_H
 
 #ifndef ENABLE_LOGGING
-#define ENABLE_LOGGING TRUE
+#define ENABLE_LOGGING 1
 #endif
 
 #include "../include/util.h"
 
 /**\brief Format/print the given message(s)
- * \param n The number of following arguments. 
- * \param __VA_ARGS A formatting string, 
- * 		then the corresponding arguments.
  * \return The number of characters written. */
-int LOG(cstr fmt, ...);
+int LOG(cstr szLine);
 
 /**\brief Print the given paragraph.
  * \param szPara The message not within the
