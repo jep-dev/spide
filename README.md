@@ -10,32 +10,26 @@ available for Linux and Windows, and this source
 should be platform-independent. By version 0.1, cross-
 compiled versions should be tested and available. 
 
-<h3>Building</h3>
-<table><tr>
-	<td>verbose</td>
-	<td><code>make</code></td>
-</tr><tr>
-	<td>quiet</td>
-	<td><code>make -s</code></td>
-</tr><tr>
-	<td>silent</td>
-	<td><code>make &gt;/dev/null</code></td>
-</tr></table>
-
 <h3>Usage</h3>
 <table><tr>
-	<th>Linux</th>
-	<th>Windows (32-bit) (todo)</th>
-	<th>Windows (64-bit) (todo)</th>
+	<th>Build (verbose)</th>
+	<td><code>make</code></td>
 </tr><tr>
-	<td><code>./build/spide</code></td>
-	<td><s>./build/spide32.exe</s></td>
-	<td><s>./build/spide64.exe</s></td>
+	<th>Build (quiet)</th>
+	<td><code>make -s</code></td>
 </tr><tr>
-	<td COLSPAN=3><center>
-		<code>make do</code><br>
-		<code>make -s do</code>
-	</td>
+	<th>Build (silent)</th>
+	<td><code>make &gt;/dev/null</code></td>
+</tr><tr>
+	<th>Build and run</th>
+	<td><code>make do</code></td>
+</tr><tr>
+	<th ROWSPAN=3>Run (prebuilt)</th>
+	<td><code>$(BINDIR)build</code></td>
+</tr><tr>
+	<td><s>$(BINDIR)build32.exe</s> (todo)</td>
+</tr><tr>
+	<td><s>$(BINDIR)build64.exe</s> (todo)</td>
 </tr></table>
 
 <h3>Structure</h3>
