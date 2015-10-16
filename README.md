@@ -82,6 +82,11 @@ compiled versions should be tested and available.
 </tr><tr>
 	<td><s>spide64.exe</s></td>
 	<td>64-bit Windows executable (todo)</td>
+</tr><tr>
+	<td COLSPAN=3><center>
+		<code>make do</code>,
+		<code>make -s do</code>
+	</td>
 </tr></table>
 
 
