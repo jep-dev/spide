@@ -1,22 +1,19 @@
 #if !defined(UTIL_H)
 #define UTIL_H
 
-#define DO_LOG defined(ENABLE_LOGGING) && \
-		ENABLE_LOGGING
-
 #include <stdio.h>
 #include <stdarg.h>
 
 typedef char* str;
-typedef const char* cstr;
+typedef char const *const cstr;
 
-#if defined(__cplusplus)
-	#if !defined(CEXT)
-		#define CEXT extern "C"
+#ifndef __cplusplus
+	#ifndef CEXT
+		#define CEXT extern
 	#endif
 #else
-	#if !defined(CEXT)
-		#define CEXT
+	#ifndef CEXT
+		#define CEXT extern "C"
 	#endif
 #endif
 

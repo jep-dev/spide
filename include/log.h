@@ -5,6 +5,7 @@
 #define ENABLE_LOGGING 1
 #endif
 
+
 #include "../include/util.h"
 
 /**\brief Format/print the given message(s)

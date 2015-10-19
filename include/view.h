@@ -1,12 +1,12 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-// Event, KeyEvent, Mouse::Button, Window
+#include "../include/util.h"
 #include <SFML/Graphics.h>
 #include <stdbool.h>
 
 
-CEXT typedef struct View {
+typedef struct View {
 	sfVideoMode mode;
 	sfContextSettings settings;
 	sfRenderWindow *window;

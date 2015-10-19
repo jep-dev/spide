@@ -1,9 +1,8 @@
 #include <stdlib.h>
 
 #include "../include/main.h"
-// LOG*
 #include "../include/util.h"
-#include "../include/log.h"
+#include "../include/term.h"
 #include "../include/view.h"
 
 #include <stdlib.h>
@@ -13,8 +12,6 @@
 
 extern bool View_init(int width, int height, 
 		const char *title, View *view){
-	LOG_FUNC(__FILE__, 
-			__PRETTY_FUNCTION__, __LINE__-1);
 	sfRenderWindow *window = view -> window;
 	sfRenderWindow_setVerticalSyncEnabled(
 			window, true);
@@ -22,14 +19,11 @@ extern bool View_init(int width, int height,
 			window, 58);
 
 	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE); // TODO
 
 	return true;
 }
 
 extern void View_quit(View *view){
-	LOG_FUNC(__FILE__, 
-			__PRETTY_FUNCTION__, __LINE__-1);
 	sfRenderWindow_close(view -> window);
 }
 
@@ -37,11 +31,10 @@ bool View_digestKeyPress(sfRenderWindow *win,
 		const sfKeyEvent *ev) {
 	switch(ev -> code){
 		case sfKeyEscape:
-			// Exit FS? Prompt for close?
-			return false; //< Quit gracefully
-		case sfKeyF4: // Toggle FS
-		case sfKeyF11: // Toggle FS
-		default: // catchall 
+			return false;
+		case sfKeyF4: /* Toggle FS? */
+		case sfKeyF11: /* Toggle FS? */
+		default: /* catchall */
 			return true;
 	}
 }
@@ -50,16 +43,12 @@ bool View_digestMousePress(sfRenderWindow *win,
 		int x, int y, sfMouseButton button) {
 	switch(button){
 		case sfMouseLeft:
-			//LOG_PRESS("Left", x, y);
 			break;
 		case sfMouseMiddle:
-			//LOG_PRESS("Middle", x, y);
 			break; 
 		case sfMouseRight:
-			//LOG_PRESS("Right", x, y);
 			break;
 		default:
-			//LOG_PRESS("Other", x, y);
 			break; 
 	}
 	return true; 
@@ -126,5 +115,4 @@ void View_draw(sfRenderWindow *win, int ticks) {
 	
 	glTranslatef(0,-2,0);
 	sfRenderWindow_display(win);
-	//win -> display();
 }

@@ -1,42 +1,36 @@
-#include "../include/main.h"
-
-#include "../include/streams.h"
 #include "../include/util.h"
-
+#include "../include/term.h"
 #include "../include/log.h"
+
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
 
-int LOG(cstr sz) {
-#ifndef ENABLE_LOGGING
-	return 0;
-#elif !ENABLE_LOGGING
+int LOG(cstr szMessage) {
+#if !ENABLE_LOGGING
 	return 0;
 #else
-	return Streams_push(sz);
+	return Streams_push(szMessage);
 #endif
 }
 
 int LOG_PARA(cstr szPara) {
-#ifndef ENABLE_LOGGING
-	return 0;
-#elif !ENABLE_LOGGING
+#if !ENABLE_LOGGING
 	return 0;
 #else
 	int len = strlen(szPara), 
 		written = 0;
-
-	char line[66], copy[len];
+	cstr whitespace = " \r\n";
+	char line[LEN_OUTER], copy[len];
 	strcpy(copy, szPara);
 
-	cstr whitespace = " ";
 	char *token = strtok(copy, whitespace);
 	int remainder = 0;
 	while(token != NULL){
 		remainder = 1;
-		if(strlen(line)+strlen(token)>=65){
-			written += printf("| %-66s |\n", line);
+		if(strlen(line) + strlen(token) >= LINE_LENGTH-6){
+			strcat(line, token);
+			written += Streams_pushBordered(line);
 			line[0] = '\0';
 		}
 		strcat(line, token);
@@ -45,7 +39,7 @@ int LOG_PARA(cstr szPara) {
 		token = strtok(NULL, whitespace);
 	}
 	if(remainder > 0){
-		printf("| %-66s |\n", line);
+		written += Streams_pushBordered(line);
 	}
 	fflush(stdout);
 	return written;
@@ -53,23 +47,37 @@ int LOG_PARA(cstr szPara) {
 }
 
 int LOG_FUNC(cstr szFile, cstr szFunc, int line) {
-#ifndef ENABLE_LOGGING
-	return 0;
-#elif !ENABLE_LOGGING
+#if !ENABLE_LOGGING
 	return 0;
 #else
-	char szLoc[66];
-	snprintf(szLoc, 66, "%s, line %d", 
-			szFile, line);
-	return printf("| %-66s |\n| %-66s |\n", 
-			szLoc, szFunc);
+	char szLoc[LEN_INNER];
+	
+	int len1 = snprintf(szLoc, LEN_INNER,
+			"(%s, line %d)", szFile, line),
+		len2 = strlen(szFunc),
+		output = 0;
+	if(len1 + len2 < LEN_INNER - 1){
+		char szAccum[LEN_INNER], 
+			 szRight[LEN_INNER];
+		snprintf(szAccum, LEN_INNER, 
+				"%s %s", szFunc, szLoc);
+		snprintf(szRight, LEN_INNER, 
+				"%-.*s", LEN_INNER, szAccum);
+		output += Streams_pushBordered(szRight);
+	} else {
+		char szAligned[LEN_INNER];
+		Streams_align(szAligned, szLoc, false);
+		output += Streams_pushBordered(szAligned);
+		Streams_align(szAligned, szFunc, true);
+		output += Streams_pushBordered(szAligned);
+	}
+	fflush(stdout);
+	return output;
 #endif
 }
 
 int LOG_PRESS(cstr szLabel, int x, int y) {
-#ifndef ENABLE_LOGGING
-	return 0;
-#elif !ENABLE_LOGGING
+#if !ENABLE_LOGGING
 	return 0;
 #else
 	return Streams_fpush(3, "| %47s press "
@@ -78,10 +86,7 @@ int LOG_PRESS(cstr szLabel, int x, int y) {
 }
 
 int LOG_SYSTEM(void) {
-
-#ifndef ENABLE_LOGGING
-	return 0;
-#elif !ENABLE_LOGGING
+#if !ENABLE_LOGGING
 	return 0;
 #else
 	char szBuffered[66];
@@ -103,8 +108,8 @@ int LOG_SYSTEM(void) {
 		strcat(szBuffered,
 			"an unknown operating system!");
 	#endif
-	
-	return printf("| %-66s |\n", 
-			szBuffered);
+	return Streams_pushBordered(szBuffered);
+	/*return printf("| %-66s |\n", 
+			szBuffered);*/
 #endif
 }
