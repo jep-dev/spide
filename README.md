@@ -12,11 +12,16 @@ compiled versions should be tested and available.
 
 <h3>Usage</h3>
 <table><tr>
+	<td COLSPAN=2></td>
+	<th>Options</th>
+</tr><tr>
 	<th>Build (verbose)</th>
 	<td><code>make</code></td>
-</tr><tr>
-	<th>Build (quiet)</th>
-	<td><code>make -s</code></td>
+	<td ROWSPAN=3>
+		<code>-s</code> builds quietly.<br>
+		<code>-CFLAGS=-DENABLE_LOGGING=1</code>
+			builds an executable that runs silently.<br>
+	</td>
 </tr><tr>
 	<th>Build (silent)</th>
 	<td><code>make &gt;/dev/null</code></td>
@@ -26,6 +31,7 @@ compiled versions should be tested and available.
 </tr><tr>
 	<th ROWSPAN=3>Run (prebuilt)</th>
 	<td><code>$(BINDIR)build</code></td>
+	<td ROWSPAN=3></td>
 </tr><tr>
 	<td><s>$(BINDIR)build32.exe</s> (todo)</td>
 </tr><tr>
@@ -47,15 +53,10 @@ compiled versions should be tested and available.
 	<td ROWSPAN=6></td>
 	<td>Utilities and macros</td>
 </tr><tr>
-	<td>log.h</td>
-	<td>log.c</td>
-	<td>log.o</td>
-	<td>Logging to stdout or an external file.</td>
-</tr><tr>
-	<td>streams.h</td>
-	<td>streams.c</td>
-	<td>streams.o</td>
-	<td>Printing and stream operators</td>
+	<td>term.h</td>
+	<td>term.c</td>
+	<td>term.o</td>
+	<td>Printing and stream operations</td>
 </tr><tr>
 	<td>net.h</td>
 	<td>net.c</td>
